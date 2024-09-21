@@ -18,7 +18,7 @@ form.addEventListener('submit', (e) => {
     console.log("asd")
   }
   else{
-    errors = getLoginFormErrors(email.value, password.value);
+    errors = getLoginFormErrors(email, password);
     // console.log("asd")
   }
 
@@ -55,7 +55,21 @@ function getSignupFormErrors(firstname, email, password, repeatPassword){
   return errors;
 }
 
-const allInputs = [firstname, email, password, repeatPassword];
+function getLoginFormErrors(email,password){
+  let errors = []
+  if(email.value  === '' || email.value  == null){
+    errors.push('Email is required')
+    email.parentElement.classList.add('incorrect')
+  }
+  if(password.value  === '' || password.value  == null){
+    errors.push('Password is required')
+    password.parentElement.classList.add('incorrect')
+  }
+
+  return errors;
+}
+
+const allInputs = [firstname, email, password, repeatPassword].filter(input => input != null);
 
 allInputs.forEach(input => {
   input.addEventListener('input', ()=>{
